@@ -1,5 +1,4 @@
 # CTMS
-|PyPI badge| |Installs badge| |License badge| |Wheel badge|
 
 CAR TRACKING & MONITORING SYSTEM in Django
 ----------------
