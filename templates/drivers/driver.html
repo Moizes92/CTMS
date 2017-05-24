@@ -1,0 +1,37 @@
+{%extends 'base.html' %}
+{% block title %}{{ driver.first_name }} {{ driver.last_name }}{% endblock %}
+{% block content %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+            <a href="{% url 'add_driver' %}">
+            <button type="button" class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-plus"></span>Add Driver
+            </button>
+            </a>
+             <a href="{% url 'edit_driver' pk=driver.id %}">
+            <button type="button" class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-plus"></span>Edit Driver
+            </button>
+            </a>
+        </ul>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       {{ vehicle.plate_num }}
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul>
+                            <li>Driver: {{ driver.first_name }} {{ driver.last_name }}</li>
+                            <li>Email address: {{ driver.email }}</li>
+                            <li>Vehicle: {{ vehicle.vehicle_set.all }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{%extends 'base.html' %}
+{% block title %}{{ accident }}{% endblock %}
+{% block content %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+             <a href="{% url 'add_accident' %}">
+                 <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-plus"></span>Add new accident report
+                 </button>
+             </a>
+        </ul>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 align='center'>Accident report for : <a href="">{{ accident.vehicle }}</a></h3>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <th>Vehicle</th>
+                                            <td>{{ accident.vehicle }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Driver</th>
+                                            <td>{{ accident.driver }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date added</th>
+                                            <td>{{ accident.timestamp }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Occurance date</th>
+                                            <td>{{ accident.date }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cost</th>
+                                            <td>{{ accident.cost }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{{ accident.description }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ accident.image.url }}"><img height="250" src="{{ accident.image.url }}"/></a>
+                            </div>
+                        </div>
+                        <a href="{% url 'delete_accident' pk=accident.id %}"><button type="button" class="btn btn-danger btn-md"><span class="glyphicon glyphicon-remove"></span> Delete</button></a>
+                        <a href="{% url 'edit_accident' pk=accident.id %}"><button type="button" class="btn btn-default btn-md"><span class="glyphicon glyphicon-wrench"></span> Edit</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

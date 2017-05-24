@@ -1,0 +1,49 @@
+{%extends 'base.html' %}
+{% block title %}
+    {% if object.id %}
+        Edit Vehicle {{ object.plate_num }}
+    {% else %}
+        Add Vehicle
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+            <a href="{% url 'edit_vehicle' pk=vehicle.id%}">
+            <button type="button" class="btn btn-default btn-md">
+                <span class="glyphicon glyphicon-plus"></span>Add Vehicle
+            </button>
+            </a>
+        </ul>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       {% if object.id %}
+                            Edit details for Vehicle {{ object.plate_num }}
+                        {% else %}
+                            Add New Vehicle
+                        {% endif %}
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <form action="{{ target }}" method='POST'>
+                        {% csrf_token %}
+
+                        <ul>
+                            {{ form.as_ul }}
+                        </ul>
+
+                        <input type="submit" value="Save" />
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

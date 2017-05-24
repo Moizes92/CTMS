@@ -1,0 +1,30 @@
+{%extends 'base.html' %}
+{% block title %}Monthly Record{{ vehicle.id }}{% endblock %}
+{% block content %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+        </ul>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       Add Vehicles
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <form id="asset_form" data-parsley-validate  method="POST" action="{% url 'add_record' %}">
+						{% csrf_token %}
+                            <div class="form-horizontal form-group col-lg-6 col-md-6 col-xs-6">
+                                {{ form.as_p}}
+                                <button type="cancel" name="addweb" class="btn btn-default pull-right">Cancel</button>
+                                <button type="submit" class="btn btn-primary pull-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ monthlyrecord }}
+{% endblock %}
+
+
+{% block content %}
+<h3 align='center'>License id: 
+	<a href="{% url 'view_owner' pk=monthlyrecord.license_id.id %}">
+		{{ monthlyrecord.license_id }}
+	</a>
+</h3>
+
+<div class="row">
+	<div class="col-lg-3">
+		<table class="table table-striped">
+		<tbody>
+			<tr>	
+				<td>Current Owner: </td>
+				<td><a href="{% url 'view_owner' pk=monthlyrecord.license_id.current_owner.id %}">
+				{{ monthlyrecord.license_id.current_owner }}
+				</a></td>
+			</tr>
+			<tr>	
+				<td>Group: </td>
+				<td>
+					<a href="{% url 'view_group' pk=monthlyrecord.license_id.classification.id %}">
+						{{ monthlyrecord.license_id.classification }}
+					</a>
+				</td>
+			</tr>
+			<tr>		
+				<td>Model: </td>
+				<td>{{ monthlyrecord.license_id.maker }} {{ monthlyrecord.license_id.car_model }}</td>
+			</tr>
+			<tr>		
+				<td>Production year: </td>
+				<td>{{ monthlyrecord.license_id.production_year }}</td>
+			</tr>
+			<tr>		
+				<td>Record period: </td>
+				<td>{{ monthlyrecord.month }}/{{ monthlyrecord.year }}</td>
+			</tr>
+			<tr>		
+				<td>Total fuel consumed [liters]: </td>
+				<td>{{ monthlyrecord.fuel_consumed }}</td>
+			</tr>
+			<tr>		
+				<td>Total fuel cost [NIS]: </td>
+				<td>{{ monthlyrecord.cost }}</td>
+			</tr>
+			<tr>		
+				<td>Total KM: </td>
+				<td>{{ monthlyrecord.km }}</td>
+			</tr>
+			<tr>		
+				<td>Average [km/Liter]: </td>
+				<td>{{ monthlyrecord.km }}/{{ monthlyrecord.fuel_consumed }}</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
+
+<br>
+<div align='center'>
+<a href="{% url 'view_record' pk=monthlyrecord.id %}"><button type="button" class="btn btn-default btn-md">
+	<span class="glyphicon glyphicon-arrow-left"></span>
+</button></a>
+
+<a href="{% url 'view_record' pk=monthlyrecord.id %}"><button type="button" class="btn btn-default btn-md">
+	<span class="glyphicon glyphicon-arrow-right"></span>
+</button></a>
+</div>
+
+<br>
+
+<a href="{% url 'edit_record' pk=monthlyrecord.id %}"><button type="button" class="btn btn-default btn-md">
+	<span class="glyphicon glyphicon-wrench"></span>
+	Edit
+</button></a>
+
+<a href="{% url 'add_record' %}"><button type="button" class="btn btn-default btn-md">
+	<span class="glyphicon glyphicon-plus"></span>
+	Add a new one
+</button></a>
+
+{% endblock %}

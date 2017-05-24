@@ -1,0 +1,195 @@
+{%extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+            <a href="{% url 'edit_vehicle' pk=vehicle.id%}"><button type="button" class="btn btn-default btn-md" style="width:20%"><span class="glyphicon glyphicon-wrench"></span>Edit Details</button></a>
+            <a href="{% url 'add_record' %}"><button class="btn btn-default btn-md"  style="width:28%"><i class="glyphicon glyphicon-calendar"></i> Add Monthly Report</button></a>
+            <a href=""><button class="btn btn-default btn-md"  style="width:24%"><i class="glyphicon glyphicon-alert"></i> Report Accident</button></a>
+            <a href=""><button class="btn btn-default btn-md"  style="width:24%"><i class="glyphicon glyphicon-dashboard"></i> Report Milage</button></a>
+        </ul>
+	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span align='center'><strong>Details for Vehicle{{ vehicle.plate_num }}</strong></span>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <table class="table table-striped table-condensed">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Plate Number:</strong>
+                                                </td>
+                                                <td>
+                                                    {{ vehicle.plate_num }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="glyphicon glyphicon-user"></i>
+                                                    <strong>Driver: </strong>
+                                                </td>
+                                                <td>
+                                                    <a href=""></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="fa fa-truck"></i>
+                                                    <strong>Model: </strong>
+                                                </td>
+                                                <td>
+                                                    {{ vehicle.brand }} {{ vehicle.model }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Color: </strong>
+                                                </td>
+                                                <td>
+                                                    {{ vehicle.color }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Production year: </strong>
+                                                </td>
+                                                <td>
+                                                    {{ vehicle.production_year }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-4">
+                                    <table class="table table-condensed">
+                                    <!--<thead>
+                                        <th class="active">
+                                        <h3 align="center">Notifications</h3>
+                                        </th>
+                                    </thead>-->
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                <strong>License renewal: </strong>
+                                            </td>
+                                            <td>
+                                                {% ifequal license_renewal 1%}
+                                                <span class="label label-danger">
+                                                    {{ vehicle.license_renewal_date|date:"d/m/Y" }}
+                                                    <span class="glyphicon glyphicon-bell"/>
+                                                </span>
+                                                {% endifequal %}
+                                                {% ifequal license_renewal 2%}
+                                                <span class="label label-warning">
+                                                    {{ vehicle.license_renewal_date|date:"d/m/Y" }}
+                                                </span>
+                                                {% endifequal %}
+                                                {% ifequal license_renewal 3%}
+                                                <span class="label label-success">
+                                                    {{ vehicle.license_renewal_date|date:"d/m/Y" }}
+                                                </span>
+                                                {% endifequal %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                <strong>Insurance renewal: </strong>
+                                            </td>
+                                            <td>
+                                                {% ifequal insurance_renewal 1%}
+                                                <span class="label label-danger">
+                                                    {{ vehicle.insurance_renewal_date|date:"d/m/Y" }}
+                                                    <span class="glyphicon glyphicon-bell"/>
+                                                </span>
+                                                {% endifequal %}
+                                                {% ifequal insurance_renewal 2%}
+                                                <span class="label label-warning">
+                                                    {{ vehicle.insurance_renewal_date|date:"d/m/Y" }}
+                                                </span>
+                                                {% endifequal %}
+                                                {% ifequal insurance_renewal 3%}
+                                                <span class="label label-success">
+                                                    {{ vehicle.insurance_renewal_date|date:"d/m/Y" }}
+                                                </span>
+                                                {% endifequal %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                <strong>Last routine treatment: </strong>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-dashboard"></i>
+                                                <strong>Last routine treatment: </strong>
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="glyphicon glyphicon-dashboard"></i>
+                                                <strong>Kilometrage: </strong>
+                                            </td>
+                                            <td>
+                                                {% if km1000 %}
+                                                <span class="label label-danger">
+                                                    {{ km }}
+                                                </span>
+                                                {% else %}
+                                                {{ km }}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+
+
+                        <a href="{% url 'edit_vehicle' pk=vehicle.id%}"><button type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                            Edit {{ vehicle.plate_num }}
+                        </button></a>
+                        <a href="{% url 'add_vehicle' %}"><button type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add Vehicle
+                        </button></a>
+                        <br>
+                        <br>
+                        <div align="center">
+                            {% ifnotequal previous_vehicle None %}
+                            <a href="{% url 'view_vehicle' pk=previous_vehicle.id %}"><button type="button" class="btn btn-default btn-md">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                                Previous Vehicle
+                            </button></a>
+                            {% endifnotequal %}
+                            {% ifnotequal next_vehicle None %}
+                            <a href="{% url 'view_vehicle' pk=next_vehicle.id %}"><button type="button" class="btn btn-default btn-md">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Next Vehicle
+                            </button></a>
+                            {% endifnotequal %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
