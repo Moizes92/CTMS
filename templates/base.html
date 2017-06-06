@@ -1,4 +1,9 @@
 {% load staticfiles i18n%}
+{% load dm2bn_tags %}
+
+{% include "dm2bn/includes/dm2bn_static.html" %}
+{% dm2bn_settings %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,20 +70,35 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="{% url 'index' %}">Dashboard</a></li>
                                 <li><a href="{% url 'location' %}">Location</a></li>
-                                <li><a href="{% url 'vehicles_list' %}">Vehicles</a></li>
+                                <li><a href="">Geofencing</a></li>
                                 <li><a href="{% url 'drivers_list' %}">Drivers</a></li>
+                                <li><a href="{% url 'vehicles_list' %}">Vehicles</a></li>
+                                 <li><a href="{% url 'gpsdevices_list' %}">GPS Devices</a></li>
                                 <li><a href="{% url 'accidents_list' %}">Accidents</a></li>
                                 <li><a href="{% url 'routes' %}">Routes</a></li>
                                 <li><a href="{% url 'schedules' %}">Shedules</a></li>
-                                <li><a href="{% url 'assets' %}">Assets</a></li>
                                 <li><a href="{% url 'reports' %}">Reports</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-10">
-                    <div class="content">
-                       {% block content%}{% endblock %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% block sub-menu %}{% endblock %}
+                        </div>
+                        <div class="col-md-12 col-md-offset-5" style="margin-top: 46px; ">
+                            <div id="messages">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div {% if message.tags %} class="alert alert-{{ message.tags }}" style="padding: 0px 2px 2px 3px;"{% endif %}><strong>{{ message }}</strong></div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="content col-md-12" {% ifequal messages 0%}style="margin-top: -52px;"{% else %}style="margin-top: -44px;"{% endifequal %}>
+                            {% block content%}{% endblock %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,6 +107,7 @@
     <footer class="navbar-fixed-bottom">
         <span>&copy; UDOM 2017</span>
     </footer>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/jquery.min.js'%}"></script>
     <!-- Custom  -->

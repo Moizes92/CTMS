@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}New Driver{% endblock %}
+{% block sub-menu %}
+    <div class="navbar top-menu">
+		<ul class="nav navbar-nav sub-menu">
+            <a href="{% url 'drivers_list' %}">
+                <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Drivers List
+                </button>
+            </a>
+            <a href="{% url 'add_driver' %}">
+                <button type="button" class="btn btn-default btn-md active">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;New Driver
+                </button>
+            </a>
+        </ul>
+	</div>
+{% endblock %}
+{% block content %}
+     <style>
+        .panel-body {
+            height: 70vh;
+            overflow: auto;
+        }
+     </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <strong style="font-size: medium">New Driver Details</strong>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

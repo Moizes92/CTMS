@@ -10,26 +10,26 @@ from django.views.generic import (
 
 from accidents.models import Accident
 from vehicle.models import Vehicle
+from accidents.forms import AccidentForm
 
 from django.db.models import Avg, Sum
 
-from braces.views import LoginRequiredMixin
+from braces.views import LoginRequiredMixin, FormMessagesMixin
 
 
 class AccidentsListView(ListView):
 
     model = Accident
-    fields = ['vehicle', 'driver', 'date', 'cost',
-              'description', 'image']
     template_name = 'accidents/accidents_list.html'
 
 
-class CreateAccidentView(CreateView):
+class CreateAccidentView(FormMessagesMixin, CreateView):
 
     model = Accident
-    fields = ['vehicle', 'driver', 'date', 'cost',
-              'description', 'image']
-    template_name = 'accidents/edit_accident.html'
+    form_class = AccidentForm
+    template_name = 'accidents/add_accident.html'
+    form_valid_message = "Accident Record created successfully"
+    form_invalid_message = "Some errors were detected during form submission. Please check and resubmit"
 
     def get_success_url(self):
         return reverse('accidents_list')
@@ -41,26 +41,27 @@ class CreateAccidentView(CreateView):
         return context
 
 
-class UpdateAccidentView(UpdateView):
+class UpdateAccidentView(FormMessagesMixin, UpdateView):
 
     model = Accident
-    fields = ['vehicle', 'driver', 'date', 'cost',
-              'description', 'image']
+    form_class = AccidentForm
     template_name = 'accidents/edit_accident.html'
+    form_valid_message = "Accident Record updated successfully"
+    form_invalid_message = "Some errors were detected during form submission. Please check and resubmit"
 
     def get_success_url(self):
         return reverse('accidents_list')
 
     def get_context_data(self, **kwargs):
         context = super(UpdateAccidentView, self).get_context_data(**kwargs)
-        context['target'] = reverse('edit_accident',
-                                    kwargs={'pk': self.get_object().id})
+        context['target'] = reverse('edit_accident', kwargs={'pk': self.get_object().id})
         return context
 
 
-class DeleteAccidentView(DeleteView):
+class DeleteAccidentView(FormMessagesMixin, DeleteView):
     model = Accident
     success_url = reverse_lazy('accidents_list')
+    form_valid_message = "Accident Record has been deleted successfully from the database"
 
 
 class AccidentView(DetailView):

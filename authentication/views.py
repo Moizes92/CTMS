@@ -7,7 +7,7 @@ def index(request):
 
 
 def location(request):
-    return render(request, "location.html")
+    return render(request, "tracking/location.html")
 
 def route(request):
 	return render(request, "routes.html")
@@ -19,7 +19,7 @@ def report(request):
 	return render(request, "reports.html")
 
 def asset(request):
-	return render(request, "assets.html")
+	return render(request, "gpsdevice/gpsdevice.html")
 
 def schedule(request):
 	return render(request, "schedules.html")

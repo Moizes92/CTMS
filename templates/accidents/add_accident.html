@@ -1,32 +1,40 @@
 {%extends 'base.html' %}
-{% block title %}Add Vehicle{% endblock %}
-{% block content %}
+{% load crispy_forms_tags %}
+{% block title %}Drivers{% endblock %}
+{% block sub-menu %}
     <div class="navbar top-menu">
 		<ul class="nav navbar-nav sub-menu">
+            <a href="{% url 'accidents_list' %}">
+                <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Accidents List
+                </button>
+            </a>
             <a href="{% url 'add_accident' %}">
-            <button type="button" class="btn btn-default btn-md">
-                <span class="glyphicon glyphicon-plus"></span>Add Accident
-            </button>
+                <button type="button" class="btn btn-default btn-md active">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Report Accident
+                </button>
             </a>
         </ul>
 	</div>
+{% endblock %}
+{% block content %}
+     <style>
+        .panel-body {
+            height: 70vh;
+            overflow: auto;
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                       Add Vehicles
+                        <strong style="font-size: medium">New Accident Details</strong>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <form id="asset_form" data-parsley-validate  method="POST" action="{% url 'add_vehicle' %}">
-						{% csrf_token %}
-                            <div class="form-horizontal form-group col-lg-6 col-md-6 col-xs-6">
-                                {{ form.as_p}}
-                                <button type="cancel" name="addweb" class="btn btn-default pull-right">Cancel</button>
-                                <button type="submit" class="btn btn-primary pull-right">Save</button>
-                            </div>
-                        </form>
+                       {% csrf_token %}
+                        {% crispy form %}
                     </div>
                 </div>
             </div>

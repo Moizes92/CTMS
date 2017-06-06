@@ -48,6 +48,8 @@ footer{
 }
 .btn{
     border-radius: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .panel-custom > .panel-heading{
     padding: 1px 15px;

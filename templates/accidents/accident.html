@@ -1,21 +1,40 @@
-{%extends 'base.html' %}
-{% block title %}{{ accident }}{% endblock %}
-{% block content %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Accident{% endblock %}
+{% block sub-menu %}
     <div class="navbar top-menu">
 		<ul class="nav navbar-nav sub-menu">
-             <a href="{% url 'add_accident' %}">
-                 <button type="button" class="btn btn-default btn-md">
-                    <span class="glyphicon glyphicon-plus"></span>Add new accident report
-                 </button>
-             </a>
+            <a href="{% url 'accidents_list' %}">
+                <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Accidents
+                </button>
+            </a>
+            <a href="{% url 'add_accident' %}">
+                <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;New Accindet
+                </button>
+            </a>
+            <a href="{% url 'edit_accident' pk=accident.id %}">
+                <button type="button" class="btn btn-default btn-md">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Edit Accident
+                </button>
+            </a>
         </ul>
 	</div>
+{% endblock %}
+{% block content %}
+     <style>
+        .panel-body {
+            height: 70vh;
+            overflow: auto;
+        }
+     </style>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 align='center'>Accident report for : <a href="">{{ accident.vehicle }}</a></h3>
+                       <strong style="font-size: medium">Accident report for : <a href="">{{ accident.vehicle }}</a></strong>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -37,11 +56,11 @@
                                         </tr>
                                         <tr>
                                             <th>Occurance date</th>
-                                            <td>{{ accident.date }}</td>
+                                            <td>{{ accident.date_of_accident }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Cost</th>
-                                            <td>{{ accident.cost }}</td>
+                                            <th>Main Cause</th>
+                                            <td>{{ accident.cause }}</td>
                                         </tr>
                                         <tr>
                                             <th>Description</th>
